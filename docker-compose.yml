@@ -1,0 +1,25 @@
+version: '3.3'
+
+services:
+  api:
+    container_name: admin_proyects
+    restart: always
+    build: .
+    ports:
+      - '5000:5000'
+    links:
+      - mongo
+    volumes:
+      - .:/usr/src/app
+    depends_on:
+      - mongo
+  mongo:
+    container_name: dbmongo
+    restart: always
+    image: mongo
+    ports:
+      - '27017:27017'
+    logging:
+      driver: none
+    volumes:
+      - ./src/db:/data/db

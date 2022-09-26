@@ -1,23 +1,22 @@
 // imports
-require('dotenv').config()
-const express = require('express')
-const cors = require('cors')
-const cookieParser = require('cookie-parser')
+require('dotenv').config();
+const express = require('express');
+const cors = require('cors');
+const cookieParser = require('cookie-parser');
 
 //instancia de express
-const app = express()
+const app = express();
 
 //middleware
-app.use(express.json({limit: '50Mb'}))
-app.use(express.urlencoded({extended: true, limit: '50Mb'}))
-app.use(cookieParser())
-app.use(cors())
+app.use(express.json({ limit: '50Mb' }));
+app.use(express.urlencoded({ extended: true, limit: '50Mb' }));
+app.use(cookieParser());
+app.use(cors());
 
 //manejador de errores
 
-
 //router
-
+app.use('/api/v1', require('./routes/'));
 
 //export app
-module.exports = app
+module.exports = app;
