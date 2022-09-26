@@ -9,7 +9,7 @@ module.exports = {
         .status(404)
         .send({ info: 'Solicitud no procesada, intenta nuevamente' });
 
-    res.status(200).send({ info: 'Solicitud exitosa', newUsers });
+    res.status(200).send({ info: 'Solicitud exitosa', users });
   },
 
   createUser: async (req, res) => {

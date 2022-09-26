@@ -11,7 +11,7 @@ module.exports = {
     const match = await utils.matchPass(data.password, user.password);
     if (!match) return res.status(400).send({ info: 'Datos incorrectos' });
 
-    const token = utils.generateToken({ userId: user._id });
+    const token = utils.generateToken({ user: user._id });
 
     res
       .cookie('access_token', token, { httpOnly: true })
