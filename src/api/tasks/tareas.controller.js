@@ -3,7 +3,7 @@ const dtoProyecto = require('../proyects/proyecto.dto.js');
 
 module.exports = {
   getTareas: async (req, res) => {
-    const tareas = await dto.getTareas({ proyecto: req.body.proyecto });
+    const tareas = await dto.getTareas({ proyecto: req.params.id });
     if (tareas.message) return res.status(404).send({ info: 'No existen tareas' });
 
     res.status(200).send({ info: 'Busqueda exitosa', tareas });
@@ -29,14 +29,14 @@ module.exports = {
 
   updateTarea: async (req, res) => {
     const { id } = req.params;
-    const { proyecto, nombre, estado } = req.body;
+    const { nombre, estado } = req.body;
     const data = {};
 
     const existeTarea = await dto.getTarea(id);
     if (!existeTarea) return res.status(404).send({ info: 'No existe la tarea' });
 
-    if (nombre) data.nombre = nombre;
-    if (estado) data.estado = estado;
+    data.nombre = nombre;
+    data.estado = estado;
 
     const updateTarea = await dto.updateTarea(id, data);
     if (updateTarea.message)

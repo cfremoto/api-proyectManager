@@ -15,9 +15,7 @@ module.exports = {
 
     const { password, ...other } = user._doc;
 
-    const enviar = { ...other, token };
-
-    res.status(200).send({ info: 'Operacion Exitosa', enviar });
+    res.status(200).send({ info: 'Operacion Exitosa', other, token });
   },
 
   getUser: async (req, res) => {
