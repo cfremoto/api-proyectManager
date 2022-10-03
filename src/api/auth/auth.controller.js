@@ -13,9 +13,22 @@ module.exports = {
 
     const token = utils.generateToken({ user: user._id });
 
-    res
-      .cookie('access_token', token, { httpOnly: true })
-      .status(200)
-      .send({ info: 'Operacion Exitosa' });
+    const { password, ...other } = user._doc;
+
+    const enviar = { ...other, token };
+
+    res.status(200).send({ info: 'Operacion Exitosa', enviar });
+  },
+
+  getUser: async (req, res) => {
+    const { user } = req.user;
+
+    const userValidado = await dto.getUserById(user);
+    if (!userValidado) return res.status(404).send({ info: 'El usuario no existe' });
+
+    if (userValidado.message)
+      return res.status(500).send({ info: 'Error interno, intente nuevamente' });
+
+    res.status(200).send({ info: 'Operacion exitosa', userValidado });
   },
 };

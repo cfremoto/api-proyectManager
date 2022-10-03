@@ -2,7 +2,7 @@ const response = require('../config/response.js');
 const auth = require('../utils/auth.utils.js');
 
 const checkToken = (req, res, next) => {
-  const token = req.cookies.access_token;
+  const token = req.headers['x-auth-token'];
 
   if (!token)
     response.error(req, res, { info: 'No estas autorizado' }, 403, 'No hay token');

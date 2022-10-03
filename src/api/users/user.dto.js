@@ -10,6 +10,15 @@ module.exports = {
     }
   },
 
+  getUserById: async (parametro) => {
+    try {
+      return await modelUser.findById(parametro).select('-password');
+    } catch (err) {
+      console.log(err);
+      return err;
+    }
+  },
+
   getUsers: async (parametro) => {
     try {
       return await modelUser.find(parametro, { password: 0 });
